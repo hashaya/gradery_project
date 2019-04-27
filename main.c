@@ -5,10 +5,11 @@
 #define XSIGN '!'
 #define YSIGN '?'
 
-int game_time, mode, temp_time, x_point, y_point, x, y, x_direction, y_direction;
+int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction;
+float game_time;
 char moves[3], board[10000];
 int main(){
-    game_time = 60;
+    game_time = 60.0;
     printf(""); // First game messege
     mode = get_number();
     system("cls");
