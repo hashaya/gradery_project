@@ -79,5 +79,6 @@ void print_screen(char board[]) {
         if (i%(x + 2) == 0)
             putchar('\n');
     }
+    printf("\nRemaining time: %f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
 }
 
