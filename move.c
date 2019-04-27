@@ -43,38 +43,28 @@ void changeindex(char board[],int from,int to){
 }
 
 void movep(char player_sign, char control[],char board[]){
-    int i, index, if_played;
-    if_played = 0;
+    int i, index;
     if (player_sign == XSIGN) {
         for(i = 0; control[i] != '\0'; i++){
             if(control[i] == 'w'){
                 index = findindex(board, XSIGN);
-                changeindex(board, index, 2);
-                if_played = 1;
                 x_direction = 2;
             }
             if(control[i] == 'a'){
                 index = findindex(board, XSIGN);
-                changeindex(board, index, 3);
-                if_played = 1;
                 x_direction = 3;
             }
             if(control[i] == 's'){
                 index = findindex(board, XSIGN);
-                changeindex(board, index, 4);
-                if_played = 1;
                 x_direction = 4;
             }
             if(control[i] == 'd'){
                 index = findindex(board, XSIGN);
-                changeindex(board, index, 1);
-                if_played = 1;
                 x_direction = 1;
             }
 
         }
-        if (if_played == 0){
-            changeindex(board, index, x_direction);
+        changeindex(board, index, x_direction);
         }
     }
 
@@ -82,31 +72,22 @@ void movep(char player_sign, char control[],char board[]){
         for(i = 0; control[i] != '\0'; i++){
             if(control[i] == 'i'){
                 index = findindex(board, YSIGN);
-                changeindex(board, index, 2);
-                if_played = 1;
                 y_direction = 2;
             }
             if(control[i] == 'j'){
                 index = findindex(board, YSIGN);
-                changeindex(board, index, 3);
-                if_played = 1;
                 y_direction = 3;
             }
             if(control[i] == 'k'){
                 index = findindex(board, YSIGN);
-                changeindex(board, index, 4);
-                if_played = 1;
                 y_direction = 4;
             }
             if(control[i] == 'l'){
                 index = findindex(board, YSIGN);
-                changeindex(board, index, 1);
-                if_played = 1;
                 y_direction = 1;
             }
         }
-        if (if_played == 0){
-            changeindex(board, index, y_direction);
+        changeindex(board, index, y_direction);
         }
     }
 }
