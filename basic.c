@@ -16,9 +16,9 @@ void make(char board[], char what, int n){ //puts n number of a given symbol in 
     int place, i;
     i = 0;
     while (i < n) {
-    for(place=randint((x*y)-(x+1), (x+1));board[place]!=' ';place=randint((x*y)-(x+1), (x+1)));
-    board[place]=what;
-    i++;
+        for(place=randint((x*y)-(x+1), (x+1));board[place]!=' ';place=randint((x*y)-(x+1), (x+1)));
+        board[place]=what;
+        i++;
     }
 }
 
