@@ -1,3 +1,9 @@
+// to include necessary global variables
+extern int x, y, x_point, y_point, game_time;
+#define XSIGN '!'
+#define YSIGN '?'
+
+// declarations
 int get_number();
 
 int randint(int upper,int lower); // Generates a random integer between upper and lower
@@ -73,13 +79,11 @@ void board_maker(char board[]) {
 }
 
 void print_screen(char board[]) {
-    int i, j;
-    i = 0;
-    j = 0;
+    int i = 0, j = 0;
     while (board[i] != '\0') {
         putchar(board[i]);
         i++;
-        if (i%(x + 2) == 0)
+        if ((i%(x + 2)) == 0)
             putchar('\n');
     }
     printf("\nRemaining time: %f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
