@@ -5,11 +5,12 @@
 #define XSIGN '!'
 #define YSIGN '?'
 
-int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction;
+int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction,i;
 float game_time;
-char moves[3], board[10000];
+char moves[201], board[10000];
 int main(){
     game_time = 60.0;
+    i=0;
     printf(""); // First game messege
     mode = get_number();
     system("cls");
@@ -18,7 +19,10 @@ int main(){
     if (mode == 0) {
         while(time != 0){ // Main loop for two player mode
                 temp_time = clock();
-                get_move(moves);
+                if(_kbhit()){
+                    _getch()=moves[i];
+                    i++;
+                }
                 movep(XSIGN, moves, board);
                 movep(YSIGN, moves, board);
                 game_time = game_time - 0.2;
@@ -27,7 +31,10 @@ int main(){
     if (mode == 1) {
         while(time != 0){ // Main loop for AI
                 temp_time = clock();
-                get_move(moves);
+                if(_kbhit()){
+                    _getch()=moves[i];
+                    i++;
+                }
                 movep(XSIGN, moves, board);
                 ai(board);
                 game_time = game_time - 0.2;
@@ -46,6 +53,4 @@ int main(){
         printf("Draw!\n");
     }
 }
-
-
 
