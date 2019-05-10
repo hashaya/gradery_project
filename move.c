@@ -65,7 +65,6 @@ void movep(char player_sign, char control[],char board[]){
 
         }
         changeindex(board, index, x_direction);
-        }
     }
 
     else if (player_sign == YSIGN) {
@@ -88,6 +87,5 @@ void movep(char player_sign, char control[],char board[]){
             }
         }
         changeindex(board, index, y_direction);
-        }
     }
 }
