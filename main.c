@@ -21,7 +21,7 @@ int main(){
         while(time != 0){ // Main loop for two player mode
                 temp_time = clock();
                 if(_kbhit()){
-                    c=_getch()
+                    c=_getch();
                     moves[i]=c;
                     i++;
                 }
@@ -34,7 +34,7 @@ int main(){
         while(time != 0){ // Main loop for AI
                 temp_time = clock();
                 if(_kbhit()){
-                    c=_getch()
+                    c=_getch();
                     moves[i]=c;
                     i++;
                 }
