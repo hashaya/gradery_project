@@ -1,10 +1,12 @@
 # gradery_project
 
-get sh/m
-Print screen + show time sh
-Board maker m
-AI sh
-Addpoint sh
+The whole project doesn't work properly.
 
-Move m
-Main m
+get sh/m done
+Print screen + show time sh done
+Board maker m done
+AI sh
+Addpoint sh done
+
+Move m done
+Main m done
