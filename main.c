@@ -6,6 +6,7 @@
 #define YSIGN '?'
 
 int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction,i;
+char c;
 float game_time;
 char moves[201], board[10000];
 int main(){
@@ -20,7 +21,8 @@ int main(){
         while(time != 0){ // Main loop for two player mode
                 temp_time = clock();
                 if(_kbhit()){
-                    _getch()=moves[i];
+                    c=_getch()
+                    moves[i]=c;
                     i++;
                 }
                 movep(XSIGN, moves, board);
@@ -32,7 +34,8 @@ int main(){
         while(time != 0){ // Main loop for AI
                 temp_time = clock();
                 if(_kbhit()){
-                    _getch()=moves[i];
+                    c=_getch()
+                    moves[i]=c;
                     i++;
                 }
                 movep(XSIGN, moves, board);
