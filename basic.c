@@ -40,7 +40,10 @@ void make(char board[], char what, int n){ //puts n number of a given symbol in 
 }
 
 void addpoint(char who,int increase){
-
+    if (who == XSIGN)
+        x_point = x_point + increase;
+    else if (who == YSIGN)
+        y_point = y_point + increase;
 }
 
 void row_maker(char board[], int length, int start, char sth) {
