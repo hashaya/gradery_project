@@ -1,3 +1,18 @@
+// to include necessary global variables
+extern int x, y, x_direction, y_direction;
+#define XSIGN '!'
+#define YSIGN '?'
+
+// declarations
+int findindex(char board[], char target);
+
+void teleport(char board[], char what);
+
+void changeindex(char board[],int from,int to);
+
+void movep(char player_sign, char control[],char board[]);
+
+
 int findindex(char board[], char target){
     int i;
     for(i=0;board[i]!=target;i++){
@@ -8,7 +23,7 @@ int findindex(char board[], char target){
 
 }
 
-void teleport(char board[], char what){ //new
+void teleport(char board[], char what){
     int to=findindex(board,'T');
     int from=findindex(board,what);
     board[from]=' ';
