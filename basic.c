@@ -1,5 +1,6 @@
 // to include necessary global variables
-extern int x, y, x_point, y_point, game_time;
+extern int x, y, x_point, y_point;
+extern float game_time;
 #define XSIGN '!'
 #define YSIGN '?'
 
@@ -79,7 +80,7 @@ void board_maker(char board[]) {
 }
 
 void print_screen(char board[]) {
-    int i = 0, j = 0;
+    int i = 0;
     while (board[i] != '\0') {
         putchar(board[i]);
         i++;
