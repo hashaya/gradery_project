@@ -22,6 +22,7 @@ int main(void){
         make(board, 'B', 10);
         make(board, 'T', 2);
         make(board, 'F', 1);
+        make(board, '.', 700);
         make(board, XSIGN, 1);
         make(board, YSIGN, 1);
         print_screen();
