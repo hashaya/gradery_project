@@ -15,8 +15,8 @@ void movep(char player_sign, char control[],char board[]);
 
 int findindex(char board[], char target){
     int i;
-    for(i=0;board[i]!=target;i++){
-        if (board[i]=='\0')
+    for(i=0; board[i] != target; i++){
+        if (board[i] == '\0')
             return -1; //error 404: not found
     }
     return i;
@@ -34,11 +34,11 @@ void changeindex(char board[],int from,int to){
     char what;
     if (to == 1)
         to = from + 1;
-    if (to == 2)
+    else if (to == 2)
         to = from - x;
-    if (to == 3)
+    else if (to == 3)
         to = from - 1;
-    if (to == 4)
+    else if (to == 4)
         to = from + x;
 
     if((board[to]!='#')&&(board[to]!='B')){
