@@ -48,7 +48,7 @@ int main(void){
                 print_screen(board);
         }
     }
-    else if (mode != 0){
+    else if (mode == 1){
         printf("\n Player 1: W(up), S(down), D(right), A(left)\n\n Q(quit the game)\n\n Press Enter to enter the game...");
         board_maker(board);
         getchar();
@@ -70,6 +70,10 @@ int main(void){
                 system("cls");
                 print_screen(board);
         }
+    }
+    else{
+        printf("Mode not applicable, try again");
+        main();
     }
     system("cls");
     if (x_point > y_point){
