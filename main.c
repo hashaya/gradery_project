@@ -11,8 +11,8 @@ char moves[200], board[10000];
 int main(void){
     char c;
     int i;
-    game_time = 5;
-    printf("\n Hello\n\n Choose your game mode:\n\n 0: Player1 vs Player2\n 1: Player1 vs Computer\n"); // First game message
+    game_time = 10;
+    printf("Hello\n\n Choose your game mode:\n\n 0: Player1 vs Player2\n 1: Player1 vs Computer\n"); // First game message
     mode = get_number();
     system("cls");
     if (mode == 0) {
@@ -43,11 +43,12 @@ int main(void){
                 movep(XSIGN, moves, board);
                 movep(YSIGN, moves, board);
                 game_time = game_time - 0.2;
+                while (clock() < temp_time + 0.2);
                 system("cls");
-                print_screen();
+                print_screen(board);
         }
     }
-    else if (mode != 0){
+    else if (mode == 1){
         printf("\n Player 1: W(up), S(down), D(right), A(left)\n\n Q(quit the game)\n\n Press Enter to enter the game...");
         board_maker(board);
         getchar();
@@ -64,12 +65,15 @@ int main(void){
                 moves[i]='\0';
                 // get end point
                 movep(XSIGN, moves, board);
-                ai(board);
+                //ai(board);
                 game_time = game_time - 0.2;
-                while (clock() < temp_time + 0.2);
                 system("cls");
-                print_screen();
+                print_screen(board);
         }
+    }
+    else{
+        printf("Mode not applicable, try again.\n");
+        main();
     }
     system("cls");
     if (x_point > y_point){
@@ -81,6 +85,14 @@ int main(void){
     if (x_point == y_point){
         printf("Draw!\n");
     }
+    printf("\nPress q to quit or r to play again.\n");
+    while((c=_getch())!='q'||c!='r'){
+        if(c=='q')
+            return 0;
+        if(c=='r'){
+            system("cls");
+            main();
+        }
+    }
     return 0;
 }
-
