@@ -1,6 +1,7 @@
 # gradery_project
 
-The whole project doesn't work properly.
+Basement almost done.
+Working on small bugs, AI and new features.
 
 get sh/m done
 Print screen + show time sh done
