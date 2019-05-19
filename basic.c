@@ -1,5 +1,5 @@
 // to include necessary global variables
-extern int x, y, x_point, y_point;
+extern int x, y, x_point, y_point, x_loc, y_loc;
 extern float game_time;
 #define XSIGN '!'
 #define YSIGN '?'
@@ -21,11 +21,13 @@ void board_maker(char board[]); // The main board maker which is called at the f
 
 void print_screen(char board[]); // Prints the game board with all stuff
 
+void print_score(); // Prints players' scores and game remaining time
+
 
 int get_number(){
-    int num,c;
-    num=0;
-    while((c=getchar()) != '\n')
+    int num, c;
+    num = 0;
+    while((c = getchar()) != '\n')
         num = num*10 + ( c - '0' );
     return num;
 }
@@ -42,6 +44,12 @@ void make(char board[], char what, int n){ //puts n number of a given symbol in 
     while (i < n) {
         for(place=randint((x*y)-(x+1), (x+1));board[place]!=' ';place=randint((x*y)-(x+1), (x+1)));
         board[place]=what;
+        if (what == XSIGN) {
+            x_loc = place;
+        }
+        else if (what == YSIGN) {
+            y_loc = place;
+        }
         i++;
     }
 }
@@ -62,31 +70,40 @@ void row_maker(char board[], int length, int start, char sth) {
 }
 
 void board_maker(char board[]) {
-    row_maker(board, x + 2, 0, '#');
+    row_maker(board, x + 2, 0, 'B');
     int i = 0;
     int pointer = x + 2;
     while (i < y) {
-        board[pointer] = '|';
+        board[pointer] = 'B';
         pointer++;
         row_maker(board, x, pointer, ' ');
         pointer = pointer + x;
-        board[pointer] = '|';
+        board[pointer] = 'B';
         pointer++;
         i++;
     }
-    row_maker(board, x + 2, pointer, '#');
+    row_maker(board, x + 2, pointer, 'B');
     pointer = pointer + x + 3;
     board[pointer] = '\0';
 }
 
 void print_screen(char board[]) {
-    int i = 0;
+    /*int i = 0;
     while (board[i] != '\0') {
         putchar(board[i]);
         i++;
         if ((i%(x + 2)) == 0)
             putchar('\n');
+    }*/
+    //printf("%s", board);
+    int i = 0;
+    while (board[i] != '\0') {
+        printf("%.*s\n", x + 2, board + i);
+        i += x + 2;
     }
-    printf("\nRemaining time: %f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
+}
+
+void print_score() {
+    printf("\nRemaining time: %0.1f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
 }
 
