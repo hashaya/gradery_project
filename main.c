@@ -5,29 +5,32 @@
 #define XSIGN '!'
 #define YSIGN '?'
 
-int mode,temp_time,x_point = 0,y_point = 0,x = 60,y = 20,x_direction,y_direction, x_loc, y_loc;
+int mode, temp_time, x_point, y_point, x = 60, y = 20, x_direction, y_direction, x_loc, y_loc;
 float game_time;
 char moves[10], board[12000];
-int main(void){
+void main(void){
     char c;
     int i;
     game_time = 10;
     printf("\n Hello\n\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Magical mode (Two Players)\n\n 0: Advanced options\n"); // First game message
     mode = get_number();
+    board_maker(board);
+    make(board, 'B', 10);
+    make(board, 'T', 2);
+    make(board, 'F', 1);
+    make(board, '.', 100);
+    make(board, XSIGN, 1);
+    make(board, YSIGN, 1);
+    x_point = 0;
+    y_point = 0;
+    x_direction = '\0';
+    y_direction = '\0';
     system("cls");
     if (mode == 1) {
-        printf("\n Player 1: W(up), S(down), D(right), A(left)\n Player 2: I(up), K(down), L(right), J(left)\n\n Q(quit the game)\n\n Press Enter to enter the game...");
-        board_maker(board);
-        getchar();
-        make(board, 'B', 10);
-        make(board, 'T', 2);
-        make(board, 'F', 1);
-        make(board, '.', 100);
-        make(board, XSIGN, 3);
-        make(board, YSIGN, 1);
+        printf("\n Player 1: W(up), S(down), D(right), A(left)\n Player 2: I(up), K(down), L(right), J(left)\n\n Q(quit the game)\n\n Press any key to enter the game...");
+        _getch();
         system("cls");
-        print_screen(board);
-        getchar();
+        glance(board, 5);
         while(game_time > 0.1){ // Main loop for two player mode
                 temp_time = clock();
                 i = 0;
