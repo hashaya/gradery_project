@@ -3,6 +3,7 @@ extern int x, y, x_point, y_point, x_loc, y_loc;
 extern float game_time;
 #define XSIGN '!'
 #define YSIGN '?'
+#define WALLSIGN '#'
 
 // declarations
 int get_number();
@@ -18,6 +19,8 @@ void addpoint(char who,int increase);
 void row_maker(char board[], int length, int start, char sth); // Makes a row of sths started at block start in borad as long as length (Just called in board_maker())
 
 void board_maker(char board[]); // The main board maker which is called at the first of the game
+
+void glance(char board[], int n); // Shows the map at the beginning of the game for n seconds
 
 void print_screen(char board[]); // Prints the game board with all stuff
 
@@ -70,32 +73,35 @@ void row_maker(char board[], int length, int start, char sth) {
 }
 
 void board_maker(char board[]) {
-    row_maker(board, x + 2, 0, 'B');
+    row_maker(board, x + 2, 0, WALLSIGN);
     int i = 0;
     int pointer = x + 2;
     while (i < y) {
-        board[pointer] = 'B';
+        board[pointer] = WALLSIGN;
         pointer++;
         row_maker(board, x, pointer, ' ');
         pointer = pointer + x;
-        board[pointer] = 'B';
+        board[pointer] = WALLSIGN;
         pointer++;
         i++;
     }
-    row_maker(board, x + 2, pointer, 'B');
+    row_maker(board, x + 2, pointer, WALLSIGN);
     pointer = pointer + x + 3;
     board[pointer] = '\0';
 }
 
+void glance(char board[], int n) {
+    int temp_time2;
+    while (n != 0) {
+        temp_time2 = clock();
+        system("cls");
+        printf("\n Take a look  at the map... %d\n\n", n);
+        n--;
+        print_screen(board);
+        while (clock() < temp_time2 + 1000);
+    }
+}
 void print_screen(char board[]) {
-    /*int i = 0;
-    while (board[i] != '\0') {
-        putchar(board[i]);
-        i++;
-        if ((i%(x + 2)) == 0)
-            putchar('\n');
-    }*/
-    //printf("%s", board);
     int i = 0;
     while (board[i] != '\0') {
         printf("%.*s\n", x + 2, board + i);
