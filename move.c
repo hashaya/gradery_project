@@ -2,6 +2,7 @@
 extern int x, y, x_direction, y_direction, x_loc, y_loc;
 #define XSIGN '!'
 #define YSIGN '?'
+#define WALLSIGN '#'
 
 // declarations
 int findindex(char board[], char target);
@@ -27,10 +28,16 @@ void teleport(char board[], char what){
     int from=findindex(board,what);
     board[from]=' ';
     board[to]=what;
+    if (what == XSIGN)
+        x_loc = to;
+    else if (what == YSIGN)
+        y_loc = to;
 }
 
 void changeindex(char board[],int from,int to){
     char what;
+    if (to == '\0')
+        return;
     if (to == 'd' || to == 'l')
         to = from + 1;
     else if (to == 'w' || to == 'i')
@@ -40,17 +47,19 @@ void changeindex(char board[],int from,int to){
     else if (to == 's' || to == 'k')
         to = from + x + 2;
 
-    if(board[to]!='B'){
+    if(board[to] != 'B' && board[to] != WALLSIGN && to != x_loc && to != y_loc){
         what=board[from];
         board[from]=' ';
         if(board[to]=='.')
             addpoint(what,1);
         else if(board[to]=='F')
             addpoint(what,5);
-        board[to]=what;
-        if(board[to]=='T'){
+        else if(board[to]=='T'){
+            board[to]=what;
             teleport(board,what);
+            return;
         }
+        board[to]=what;
         if (what == XSIGN)
             x_loc = to;
         else if (what == YSIGN)
