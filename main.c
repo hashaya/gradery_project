@@ -8,12 +8,12 @@
 int mode, temp_time, x_point, y_point, x = 60, y = 20, x_direction, y_direction, x_loc, y_loc;
 float game_time;
 char moves[10], board[12000];
-void main(void){
+int main(void){
     srand(time(NULL));
     char c;
     int i;
     game_time = 10;
-    printf("\n Hello\n\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Magical mode (Two Players)\n\n 0: Advanced options\n"); // First game message
+    printf("\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Magical mode (Two Players)\n\n 0: Advanced options\n"); // First game message
     mode = get_number();
     board_maker(board);
     make(board, 'B', 10);
@@ -39,6 +39,8 @@ void main(void){
                 while (clock() < temp_time + 200) {
                     if(_kbhit() && i < 10){
                         c = _getch();
+                        if(c=='Q')
+                            exit(0);
                         moves[i] = c;
                         i++;
                     }
@@ -66,6 +68,8 @@ void main(void){
                 while (clock() < temp_time + 200) {
                     if(_kbhit() && i < 10){
                         c = _getch();
+                        if(c=='Q')
+                            exit(0);
                         moves[i] = c;
                         i++;
                     }
@@ -82,7 +86,33 @@ void main(void){
         }
     }
     else if (mode == 3) {
-
+        printf("\n Player 1: W(up), S(down), D(right), A(left)\n Player 2: I(up), K(down), L(right), J(left)\n\n Q(quit the game)\n\n Press any key to enter the game...");
+        _getch();
+        system("cls");
+        glance(board, 5);
+        while(game_time > 0.1){ // Main loop for two player mode
+                temp_time = clock();
+                i = 0;
+                // get start point
+                while (clock() < temp_time + 200) {
+                    if(_kbhit() && i < 10){
+                        c = _getch();
+                        if(c=='Q')
+                            exit(0);
+                        moves[i] = c;
+                        i++;
+                    }
+                }
+                moves[i]='\0';
+                // get end point
+                movep(XSIGN, moves, board);
+                movep(YSIGN, moves, board);
+                game_time = game_time - 0.2;
+                //while (clock() < temp_time + 0.2);
+                system("cls");
+                print_screen(board);
+                print_score();
+        }
     }
     else if (mode == 0) {
 
@@ -104,10 +134,11 @@ void main(void){
     printf("\nPress q to quit or r to play again.\n");
     while((c=_getch())!='q'||c!='r'){
         if(c=='q')
-            return 0;
+            exit(0);
         if(c=='r'){
             system("cls");
             main();
         }
     }
+    return 0;
 }
