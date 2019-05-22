@@ -32,7 +32,6 @@ void teleport(char board[], char what){
         x_loc = to;
     else if (what == YSIGN)
         y_loc = to;
-    make(board, 'T', 2);
 }
 
 void changeindex(char board[],int from,int to){
@@ -51,13 +50,18 @@ void changeindex(char board[],int from,int to){
     if(board[to] != 'B' && board[to] != WALLSIGN && to != x_loc && to != y_loc){
         what=board[from];
         board[from]=' ';
-        if(board[to]=='.')
+        if(board[to]=='.'){
             addpoint(what,1);
-        else if(board[to]=='F')
+            make(board, '.', 1);
+        }
+        else if(board[to]=='F'){
             addpoint(what,5);
+            make(board, 'F', 1);
+        }
         else if(board[to]=='T'){
             board[to]=what;
             teleport(board,what);
+            make(board, 'T', 2);
             return;
         }
         board[to]=what;
