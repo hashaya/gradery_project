@@ -32,6 +32,7 @@ void teleport(char board[], char what){
         x_loc = to;
     else if (what == YSIGN)
         y_loc = to;
+    make(board, 'T', 2);
 }
 
 void changeindex(char board[],int from,int to){
