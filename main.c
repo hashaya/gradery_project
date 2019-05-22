@@ -9,6 +9,7 @@ int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction, x_loc, y_
 float game_time;
 char moves[10], board[12000];
 int main(void){
+    hidecursor();
     srand(time(NULL));
     char c;
     int i;
