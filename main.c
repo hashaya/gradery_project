@@ -5,23 +5,25 @@
 #define XSIGN '!'
 #define YSIGN '?'
 
-int mode, temp_time, x_point, y_point, x = 60, y = 20, x_direction, y_direction, x_loc, y_loc;
+int mode, temp_time, x_point, y_point, x, y, x_direction, y_direction, x_loc, y_loc, number_of_dots;
 float game_time;
 char moves[10], board[12000];
 int main(void){
     srand(time(NULL));
     char c;
     int i;
-    game_time = 10;
     printf("\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Probe (Two Players)\n\n 0: Advanced options\n"); // First game message
     mode = get_number();
-    board_maker(board);
-    make(board, 'B', 10);
+    // Reading from file and making game board
+    read1();
+    board_maker(board, x, y);
+    read2();
+    make(board, '.', number_of_dots);
     make(board, 'T', 2);
     make(board, 'F', 1);
-    make(board, '.', 100);
     make(board, XSIGN, 1);
     make(board, YSIGN, 1);
+    // Game starting settings
     x_point = 0;
     y_point = 0;
     x_direction = '\0';
