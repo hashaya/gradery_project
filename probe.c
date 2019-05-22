@@ -157,10 +157,10 @@ int frontof(char what,int dir,char board[]){
 }
 
 void print_screen_probe(char board[]){
-    int i,k=1,xf=0,yf=0;
+    int i,k=1,xf=0,yf=0,pd;
     frontof(XSIGN,x_direction,board);
     frontof(YSIGN,y_direction,board);
-    for(i=0;board[i]!='\0';i++){
+    for(i=0,pd;board[i]!='\0';i++,pd=0){
         if(board[i]=='#'){
             printf("#");
             if(i==k*(x+2)-1){
@@ -173,17 +173,18 @@ void print_screen_probe(char board[]){
             if(i==xfront[xf]){
                 printf("%c",board[i]);
                 xf++;
+                pd=1;
                 if(i==yfront[yf]){
                     yf++;
                 }
-                continue;
             }
-            if(i==yfront[yf]){
+            if(i==yfront[yf]&&pd==0){
                 printf("%c",board[i]);
                 yf++;
-                continue;
+                pd=1;
             }
-            printf(" ");
+            if(pd==0)
+                printf(" ");
         }
     }
 }
