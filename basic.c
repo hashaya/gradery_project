@@ -3,6 +3,7 @@
 // to include necessary global variables
 extern int x, y, x_point, y_point, x_loc, y_loc;
 extern float game_time;
+extern char x_name[], y_name[];
 #define XSIGN '!'
 #define YSIGN '?'
 #define WALLSIGN '#'
@@ -31,6 +32,10 @@ void print_score(); // Prints players' scores and game remaining time
 void hidecursor(); // Hides the cursor in CMD during the game
 
 void constant_maker(char board[], int x, int y, int block_x, int block_y, char const_sign);
+
+void get_player_name(int n, char default_name[]);
+
+int is_equal(char a[], char b[]);
 
 int get_number(){
     int num, c;
@@ -115,15 +120,15 @@ void print_screen(char board[]) {
 }
 
 void print_score() {
-    printf("\nRemaining time: %0.1f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
+    printf("\nRemaining time: %0.1f\n%s's score: %d\n%s's score: %d\n", game_time, x_name, x_point, y_name, y_point);
 }
 
 void hidecursor() {
-   HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-   CONSOLE_CURSOR_INFO info;
-   info.dwSize = 100;
-   info.bVisible = FALSE;
-   SetConsoleCursorInfo(consoleHandle, &info);
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
 }
 
 void constant_maker(char board[], int x, int y, int block_x, int block_y, char const_sign){
@@ -133,3 +138,76 @@ void constant_maker(char board[], int x, int y, int block_x, int block_y, char c
         board[place] = const_sign;
     }
 }
+
+void get_player_name(int n, char default_name[]) {
+    if (default_name[0] == '\0'){
+        char name[50];
+        name[0] = '\0';
+        while(name[0] == '\0') {
+            system("cls");
+            printf("Enter a name for player %d: ", n);
+            int i = 0;
+            char c;
+            while ((c = getchar()) != '\n'){
+                name[i] = c;
+                i++;
+            }
+            name[i] = '\0';
+            if (i >= 30){
+                name[0] = '\0';
+                printf("Invalid name (Name can not contain more than 30 characters)\nPress any key to add a new name...");
+                getchar();
+            }
+            else if (is_equal(name, "")) {
+                name[0] = '\0';
+                printf("Invalid name (Name can not be nothing)\nPress any key to add a new name...");
+                getchar();
+            }
+            else if (is_equal(name, x_name) || is_equal(name, y_name)){
+                name[0] = '\0';
+                printf("Invalid name (Same as other player name)\nPress any key to add a new name...");
+                getchar();
+            }
+            else if (is_equal(name, "computer") || is_equal(name, "Computer")){
+                name[0] = '\0';
+                printf("Invalid name (Name can not be 'Computer')\nPress any key to add a new name...");
+                getchar();
+            }
+            else{
+                get_player_name(n, name);
+                system("cls");
+            }
+        }
+    }
+    else{
+        int i = 0;
+        if (n == 1) {
+            while (default_name[i] != '\0'){
+                x_name[i] = default_name[i];
+                i++;
+            }
+            x_name[i] = '\0';
+        }
+        if (n == 2) {
+            while (default_name[i] != '\0'){
+                y_name[i] = default_name[i];
+                i++;
+            }
+            y_name[i] = '\0';
+        }
+    }
+}
+
+int is_equal(char a[], char b[]){
+    int i = 0;
+    while (a[i] != '\0') {
+        if (a[i] != b[i])
+            return 0;
+        i++;
+    }
+    if (b[i] == '\0')
+        return 1;
+    else
+        return 0;
+}
+
