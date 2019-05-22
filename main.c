@@ -72,7 +72,7 @@ int main(void){
         printf("\n %s(!): W(up), S(down), D(right), A(left)\n\n Q(quit the game)\n\n Press Enter to enter the game...", x_name);
         _getch();
         system("cls");
-        glance(board, 2);
+        glance(board, 5);
         while(game_time > 0.1){ // Main loop for two player mode
                 temp_time = clock();
                 i = 0;
