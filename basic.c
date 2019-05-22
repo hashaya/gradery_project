@@ -62,6 +62,10 @@ void addpoint(char who,int increase){
         x_point = x_point + increase;
     else if (who == YSIGN)
         y_point = y_point + increase;
+    if(increase==5)
+        make(board,'F',1);
+    else
+        make(board,'.',1);
 }
 
 void row_maker(char board[], int length, int start, char sth) {
