@@ -170,7 +170,15 @@ void print_screen_probe(char board[]){
         }else if(board[i]==XSIGN||board[i]==YSIGN)
             printf("%c",board[i]);
         else{
-            
+            for(xf=0,yf=0;xf<17;xf++,yf++){
+                if(i==xfront[xf]||i==yfront[yf]){
+                    printf("%c",board[i]);
+                    pd=1;
+                    break;
+                }
+            }
+            if(pd==0)
+                printf(" ");
         }
     }
 }
