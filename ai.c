@@ -42,15 +42,15 @@ void ai(char board[],int rad){
     else if(board[y_loc+x+3]=='.')
         choice[0]='k';
 
-    else if(board[y_loc-x-2]!='#'&&prev!='k')
+    else if(board[y_loc-x-2]!='#'&&prev!='k'&&board[y_loc-x-2]!='B')
         choice[0]='i';
-    else if(board[y_loc-1]!='#'&&prev!='l')
+    else if(board[y_loc-1]!='#'&&prev!='l'&&board[y_loc-1]!='B')
         choice[0]='j';
-    else if(board[y_loc+x+2]!='#'&&prev!='i')
+    else if(board[y_loc+x+2]!='#'&&prev!='i'&&board[y_loc+x+2]!='B')
         choice[0]='k';
-    else if(board[y_loc-x]!='#'&&prev!='j')
+    else if(board[y_loc+1]!='#'&&prev!='j'&&board[y_loc+1]!='B')
         choice[0]='l';
-
+    
     choice[1]='\0';
     movep(YSIGN,choice,board);
     prev=choice[0];
