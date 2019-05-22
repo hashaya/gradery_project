@@ -9,6 +9,7 @@ int mode, temp_time, x_point, y_point, x = 60, y = 20, x_direction, y_direction,
 float game_time;
 char moves[10], board[12000];
 void main(void){
+    srand(time(NULL));
     char c;
     int i;
     game_time = 10;
@@ -55,25 +56,29 @@ void main(void){
     }
     else if (mode == 2){
         printf("\n Player 1: W(up), S(down), D(right), A(left)\n\n Q(quit the game)\n\n Press Enter to enter the game...");
-        board_maker(board);
-        getchar();
-        print_screen();
-        while(game_time != 0){ // Main loop for AI
+        _getch();
+        system("cls");
+        glance(board, 5);
+        while(game_time > 0.1){ // Main loop for two player mode
                 temp_time = clock();
-                // get start point
                 i = 0;
-                if(_kbhit()&&i<=200){
-                    c=_getch();
-                    moves[i]=c;
-                    i++;
+                // get start point
+                while (clock() < temp_time + 200) {
+                    if(_kbhit() && i < 10){
+                        c = _getch();
+                        moves[i] = c;
+                        i++;
+                    }
                 }
                 moves[i]='\0';
                 // get end point
                 movep(XSIGN, moves, board);
-                //ai(board);
+                ai(board,1);
                 game_time = game_time - 0.2;
+                //while (clock() < temp_time + 0.2);
                 system("cls");
                 print_screen(board);
+                print_score();
         }
     }
     else if (mode == 3) {
