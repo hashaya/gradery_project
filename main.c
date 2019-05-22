@@ -13,7 +13,7 @@ int main(void){
     srand(time(NULL));
     char c;
     int i;
-    printf("\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Probe (Two Players)\n\n 0: Advanced options\n"); // First game message
+    printf("\n Choose your game mode:\n\n 1: Player1 vs Player2\n 2: Player1 vs Computer\n 3: Probe (Two Players)\n\n 0: Advanced options\n "); // First game message
     mode = get_number();
     // Reading from file and making game board
     read1();
