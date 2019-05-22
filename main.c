@@ -110,7 +110,7 @@ int main(void){
                 game_time = game_time - 0.2;
                 //while (clock() < temp_time + 0.2);
                 system("cls");
-                print_screen(board);
+                print_screen_probe(board);
                 print_score();
         }
     }
