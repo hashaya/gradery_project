@@ -1,3 +1,5 @@
+#include <windows.h> // Used for hiding the cursor
+
 // to include necessary global variables
 extern int x, y, x_point, y_point, x_loc, y_loc;
 extern float game_time;
@@ -18,7 +20,7 @@ void addpoint(char who,int increase);
 
 void row_maker(char board[], int length, int start, char sth); // Makes a row of sths started at block start in borad as long as length (Just called in board_maker())
 
-void board_maker(char board[]); // The main board maker which is called at the first of the game
+void board_maker(char board[], int x, int y); // The main board maker which is called at the first of the game
 
 void glance(char board[], int n); // Shows the map at the beginning of the game for n seconds
 
@@ -26,6 +28,9 @@ void print_screen(char board[]); // Prints the game board with all stuff
 
 void print_score(); // Prints players' scores and game remaining time
 
+void hidecursor(); // Hides the cursor in CMD during the game
+
+void constant_maker(char board[], int x, int y, int block_x, int block_y, char const_sign);
 
 int get_number(){
     int num, c;
@@ -62,10 +67,6 @@ void addpoint(char who,int increase){
         x_point = x_point + increase;
     else if (who == YSIGN)
         y_point = y_point + increase;
-    if(increase==5)
-        make(board,'F',1);
-    else
-        make(board,'.',1);
 }
 
 void row_maker(char board[], int length, int start, char sth) {
@@ -76,7 +77,7 @@ void row_maker(char board[], int length, int start, char sth) {
     }
 }
 
-void board_maker(char board[]) {
+void board_maker(char board[], int x, int y) {
     row_maker(board, x + 2, 0, WALLSIGN);
     int i = 0;
     int pointer = x + 2;
@@ -117,3 +118,18 @@ void print_score() {
     printf("\nRemaining time: %0.1f\nPlayer 1 score: %d\nPlayer 2 score: %d\n", game_time, x_point, y_point);
 }
 
+void hidecursor() {
+   HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+   CONSOLE_CURSOR_INFO info;
+   info.dwSize = 100;
+   info.bVisible = FALSE;
+   SetConsoleCursorInfo(consoleHandle, &info);
+}
+
+void constant_maker(char board[], int x, int y, int block_x, int block_y, char const_sign){
+    if (block_x <= x && block_y <= y) {
+        int place;
+        place = block_y * (x + 2) + block_x + 1;
+        board[place] = const_sign;
+    }
+}
