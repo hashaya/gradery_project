@@ -34,3 +34,31 @@ void read2() {
     }
     fclose(my_file);
 }
+
+
+void record(char winner[],char loser[],int wp,int lp){
+    FILE *my_file;
+    my_file=fopen("leaderboard.txt","a+");
+    fprintf(my_file,"%s  %d - %d  %s\n",winner,wp,lp,loser);
+    fclose(my_file);
+}
+
+int getscore(char p1[],char p2[],char whose[]){
+    int res,d1,d2;
+    FILE *my_file;
+    my_file=fopen("leaderboard.txt","r");
+    if(fscanf(my_file,"%s  %d - %d  %s\n",p1,&d1,&d2,p2))
+        if(strcmp(p1,whose)==0)
+            res=d1;
+        else
+            res=d2;
+    else if(fscanf(my_file,"%s  %d - %d  %s\n",p2,&d1,&d2,p1))
+        if(strcmp(p2,whose)==0)
+            res=d1;
+        else
+            res=d2;
+    else
+        res=0;
+    fclose(my_file);
+    return res;
+}
