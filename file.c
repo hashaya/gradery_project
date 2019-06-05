@@ -47,12 +47,12 @@ int getscore(char p1[],char p2[],char whose[]){
     int res,d1,d2;
     FILE *my_file;
     my_file=fopen("leaderboard.txt","r");
-    if(fscanf(my_file,"%s  %d - %d  %s\n",p1,&d1,&d2,p2))
+    if(fscanf(my_file,"%s  %d - %d  %s\n",p1,d1,d2,p2))
         if(strcmp(p1,whose)==0)
             res=d1;
         else
             res=d2;
-    else if(fscanf(my_file,"%s  %d - %d  %s\n",p2,&d1,&d2,p1))
+    else if(fscanf(my_file,"%s  %d - %d  %s\n",p2,d1,d2,p1))
         if(strcmp(p2,whose)==0)
             res=d1;
         else
