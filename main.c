@@ -156,12 +156,15 @@ int main(void){
     system("cls");
     if (x_point > y_point){
         printf("\n %s's score: %d\n %s's score: %d\n\n %s won the game!\n", x_name, x_point, y_name, y_point, x_name);
+        record(x_name,y_name,getscore(x_name,y_name,x_name)+1,getscore(x_name,y_name,y_name));
     }
     else if (x_point < y_point){
         printf("\n %s's score: %d\n %s's score: %d\n\n %s won the game!\n", x_name, x_point, y_name, y_point, y_name);
+        record(y_name,x_name,getscore(x_name,y_name,y_name)+1,getscore(x_name,y_name,x_name));
     }
     else if (x_point == y_point){
         printf("\n %s's score: %d\n %s's score: %d\n\n Draw!\n", x_name, x_point, y_name, y_point);
+        record(x_name,y_name,getscore(x_name,y_name,x_name),getscore(x_name,y_name,y_name));
     }
     printf("\n Press q to quit or r to play again.\n");
     while((c=_getch())!='q'||c!='r'){
