@@ -1,4 +1,5 @@
-extern int x,y,x_direction,y_direction,x_loc,y_loc;
+extern int x,y,x_loc,y_loc;
+extern char x_direction, y_direction;
 #define XSIGN '!'
 #define YSIGN '?'
 
@@ -77,6 +78,15 @@ int frontof(char what,int dir,char board[]){
             xfront[14]=x_loc+5+(x+2);
             xfront[15]=x_loc+4+2*(x+2);
             xfront[16]=x_loc+5+2*(x+2);
+        }else{
+            xfront[0]=x_loc-(x+2)-1;
+            xfront[1]=x_loc-2*(x+2);
+            xfront[2]=x_loc-2*(x+2)+1;
+            xfront[3]=x_loc-1;
+            xfront[4]=x_loc+1;
+            xfront[5]=x_loc+(x+2)-1;
+            xfront[6]=x_loc+(x-2);
+            xfront[7]=x_loc+(x-2)+1;
         }
     }
     else{
@@ -152,15 +162,24 @@ int frontof(char what,int dir,char board[]){
             yfront[14]=y_loc+5+(x+2);
             yfront[15]=y_loc+4+2*(x+2);
             yfront[16]=y_loc+5+2*(x+2);
+        }else{
+            yfront[0]=y_loc-(x+2)-1;
+            yfront[1]=y_loc-2*(x+2);
+            yfront[2]=y_loc-2*(x+2)+1;
+            yfront[3]=y_loc-1;
+            yfront[4]=y_loc+1;
+            yfront[5]=y_loc+(x+2)-1;
+            yfront[6]=y_loc+(x-2);
+            yfront[7]=y_loc+(x-2)+1;
         }
     }
 }
 
 void print_screen_probe(char board[]){
-    int i,k=1,xf=0,yf=0,pd;
+    int i,k=1,xf=0,yf=0,pd=0;
     frontof(XSIGN,x_direction,board);
     frontof(YSIGN,y_direction,board);
-    for(i=0,pd;board[i]!='\0';i++,pd=0){
+    for(i=0;board[i]!='\0';i++,pd=0){
         if(board[i]=='#'){
             printf("#");
             if(i==k*(x+2)-1){
@@ -170,15 +189,17 @@ void print_screen_probe(char board[]){
         }else if(board[i]==XSIGN||board[i]==YSIGN){
             printf("%c",board[i]);
         }else{
-            if(i==xfront[xf]){
+            if(i==xfront[xf]&&xf<=16){
+                //printf("%c",board[i]);
                 printf("%c",board[i]);
                 xf++;
                 pd=1;
-                if(i==yfront[yf]){
+                if(i==yfront[yf]&&yf<=16){
                     yf++;
                 }
             }
-            if(i==yfront[yf]&&pd==0){
+            if(i==yfront[yf]&&pd==0&&yf<=16){
+                //printf("%c",board[i]);
                 printf("%c",board[i]);
                 yf++;
                 pd=1;
