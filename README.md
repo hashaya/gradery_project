@@ -1,7 +1,7 @@
 # gradery_project
 
-Basement almost done.
-Working on small bugs, AI and new features.
+111% Done!
+
 
 get sh/m done
 Print screen + show time sh done
